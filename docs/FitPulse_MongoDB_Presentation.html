@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FitPulse — MongoDB Project Presentation</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-weight: 400 !important;
+    }
+    body {
+      background-color: #0B0F19;
+      color: #F8FAFC;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      overflow-x: hidden;
+    }
+    header {
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #273349;
+      background-color: #151B2B;
+    }
+    .brand {
+      font-size: 18px;
+      color: #A3E635;
+      letter-spacing: 0.5px;
+    }
+    .course-badge {
+      font-size: 12px;
+      color: #94A3B8;
+      border: 1px solid #273349;
+      padding: 4px 12px;
+      border-radius: 9999px;
+      background-color: #0B0F19;
+    }
+    main {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+    .slide-container {
+      width: 100%;
+      max-width: 1100px;
+      min-height: 580px;
+      background-color: #151B2B;
+      border: 1px solid #273349;
+      border-radius: 16px;
+      padding: 40px;
+      display: none;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    }
+    .slide-container.active {
+      display: flex;
+    }
+    .slide-header {
+      border-bottom: 1px solid #273349;
+      padding-bottom: 16px;
+      margin-bottom: 24px;
+    }
+    .slide-number {
+      font-size: 12px;
+      color: #A3E635;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 6px;
+    }
+    .slide-title {
+      font-size: 24px;
+      color: #FFFFFF;
+      margin-bottom: 4px;
+    }
+    .slide-subtitle {
+      font-size: 14px;
+      color: #94A3B8;
+    }
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: #E2E8F0;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .grid-3 {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 16px;
+    }
+    .card-box {
+      background-color: #1C2435;
+      border: 1px solid #273349;
+      border-radius: 12px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .card-box-title {
+      font-size: 14px;
+      color: #A3E635;
+    }
+    .card-box-desc {
+      font-size: 13px;
+      color: #94A3B8;
+      line-height: 1.5;
+    }
+    .code-box {
+      background-color: #0B0F19;
+      border: 1px solid #273349;
+      border-radius: 8px;
+      padding: 12px;
+      font-family: monospace;
+      font-size: 12px;
+      color: #A3E635;
+      overflow-x: auto;
+    }
+    ul {
+      margin-left: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    li {
+      color: #CBD5E1;
+    }
+    footer {
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #273349;
+      background-color: #151B2B;
+    }
+    .nav-btn {
+      background-color: #1C2435;
+      color: #F8FAFC;
+      border: 1px solid #273349;
+      padding: 8px 20px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 14px;
+      transition: background 0.2s;
+    }
+    .nav-btn:hover:not(:disabled) {
+      background-color: #273349;
+      color: #A3E635;
+    }
+    .nav-btn:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+    .progress-text {
+      font-size: 14px;
+      color: #94A3B8;
+    }
+    .slide-footer-note {
+      font-size: 11px;
+      color: #64748B;
+      margin-top: 16px;
+      border-top: 1px solid #273349;
+      padding-top: 8px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div class="brand">FitPulse — Personal Fitness Intelligence Platform</div>
+    <div class="course-badge">MongoDB Course Project Presentation</div>
+  </header>
+
+  <main>
+    <!-- Slide 1 -->
+    <div class="slide-container active" id="slide-1">
+      <div class="slide-header">
+        <div class="slide-number">Slide 1 of 10</div>
+        <div class="slide-title">FitPulse — Your Personal Fitness Intelligence Platform</div>
+        <div class="slide-subtitle">Advanced MERN-Stack Fitness Tracking Powered by MongoDB Document Architecture</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-box">
+            <div class="card-box-title">Project Mission</div>
+            <div class="card-box-desc">
+              To replace superficial client-side state manipulation with a production-grade personal fitness intelligence platform where metric reductions, cross-domain joins, and habit analytics are executed directly on the MongoDB database engine.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Technology Stack</div>
+            <div class="card-box-desc">
+              MongoDB 8.x (ODM via Mongoose 8.9), Express.js, React 18 with Vite, Node.js, TypeScript throughout, Tailwind CSS, Recharts.
+            </div>
+          </div>
+        </div>
+        <div class="card-box">
+          <div class="card-box-title">Core Tracking Domains</div>
+          <div class="card-box-desc">
+            Daily steps, walking distance, walking and workout caloric expenditure, itemized nutrition and macronutrients, multi-set resistance exercise volume, sleep duration across midnight, milliliter hydration, and anthropometric body measurements.
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Presenter: Academic Project Demonstration | Database Management Systems Laboratory</div>
+    </div>
+
+    <!-- Slide 2 -->
+    <div class="slide-container" id="slide-2">
+      <div class="slide-header">
+        <div class="slide-number">Slide 2 of 10</div>
+        <div class="slide-title">Problem Statement & Motivation</div>
+        <div class="slide-subtitle">Addressing the Architectural Limitations of Traditional Fitness Trackers</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-box">
+            <div class="card-box-title">In-Memory Computation Bottleneck</div>
+            <div class="card-box-desc">
+              Conventional web trackers haul large arrays of unindexed raw logs into application runtime memory, executing slow JavaScript loops to compute weekly totals and macro distributions.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Fragmented Biometric Silos</div>
+            <div class="card-box-desc">
+              Step counters, meal logs, and workout diaries operate in isolation without database-level correlation between calories consumed and calories burned.
+            </div>
+          </div>
+        </div>
+        <div class="card-box">
+          <div class="card-box-title">The FitPulse Engineering Solution</div>
+          <ul>
+            <li>Employs hybrid document modeling balancing read locality with safe unbounded history logging.</li>
+            <li>Offloads analytical processing entirely to native MongoDB aggregation pipelines ($match, $group, $unwind, $lookup, $project).</li>
+            <li>Guarantees multi-tenant isolation, compound indexing, and zero mock data.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="slide-footer-note">Theoretical Context: Document-oriented schema design versus traditional relational modeling</div>
+    </div>
+
+    <!-- Slide 3 -->
+    <div class="slide-container" id="slide-3">
+      <div class="slide-header">
+        <div class="slide-number">Slide 3 of 10</div>
+        <div class="slide-title">System Architecture — 3-Tier Decoupled MERN Topology</div>
+        <div class="slide-subtitle">Clear Separation of Concerns Across Client, Application, and Database Tiers</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card-box">
+            <div class="card-box-title">Presentation Tier (Client)</div>
+            <div class="card-box-desc">
+              React 18 SPA built with Vite and TypeScript.<br>
+              Dark-mode SaaS theme (#0B0F19, #151B2B, #1C2435, #A3E635 lime).<br>
+              Interactive Recharts visualizations and custom SVG circular progress rings.<br>
+              Communicates via Axios REST JSON.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Application Tier (API Server)</div>
+            <div class="card-box-desc">
+              Node.js and Express.js with TypeScript.<br>
+              Helmet HTTP headers, CORS, rate limiting (500 req/15 min).<br>
+              Zod schema validation layer.<br>
+              Stateless JWT authentication with bcrypt password hashing (salt rounds: 10).
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Database Tier (MongoDB)</div>
+            <div class="card-box-desc">
+              MongoDB Community Server 8.x / Atlas.<br>
+              Mongoose ODM for schema constraints.<br>
+              Ten persistent collections.<br>
+              Compound indexing and multi-stage aggregation pipelines.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Architectural Principle: All data reductions execute directly on the database cluster</div>
+    </div>
+
+    <!-- Slide 4 -->
+    <div class="slide-container" id="slide-4">
+      <div class="slide-header">
+        <div class="slide-number">Slide 4 of 10</div>
+        <div class="slide-title">Database Design Philosophy — Hybrid Document Modeling</div>
+        <div class="slide-subtitle">Balancing Locality of Reference with Unbounded Chronological Growth</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-box">
+            <div class="card-box-title">When to Embed Documents</div>
+            <div class="card-box-desc">
+              Child entities exist strictly within the lifecycle of the parent record and are queried together.<br><br>
+              Example 1: Workout Sets inside Exercises within WorkoutLog. Sets have no meaning outside the session, eliminating multi-table relational joins.<br><br>
+              Example 2: Macro Snapshots inside MealLog. Each meal item stores an immutable copy of its calories and macros at log time, isolating historical logs from future food catalog changes.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">When to Reference Documents</div>
+            <div class="card-box-desc">
+              Entities have independent lifecycles, require safe pagination, or risk unbounded document growth.<br><br>
+              Example 1: All operational log collections reference the User collection via userId (Schema.Types.ObjectId, ref: 'User'). This enables infinite logging without hitting the 16 MB BSON document size limit.<br><br>
+              Example 2: Reusable WorkoutTemplate documents and global FoodItem catalog entries exist independently of user session instances.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Design Rule: Favor embedding for 1-to-few bounded relationships; favor referencing for 1-to-many unbounded timelines</div>
+    </div>
+
+    <!-- Slide 5 -->
+    <div class="slide-container" id="slide-5">
+      <div class="slide-header">
+        <div class="slide-number">Slide 5 of 10</div>
+        <div class="slide-title">Detailed Schema Architecture — The 10 MongoDB Collections</div>
+        <div class="slide-subtitle">Formally Typed Document Schemas with Relational Constraints</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-box">
+            <div class="card-box-title">Identity & Daily Activity Collections</div>
+            <div class="card-box-desc">
+              1. users: name, email (unique), passwordHash (select: false), height, weight, activityLevel, fitnessGoal, embedded preferences.<br>
+              2. activity_logs: userId, date (YYYY-MM-DD), steps, distanceKm, estimatedCaloriesBurned, source. Unique index on (userId, date).<br>
+              3. food_items: name, category, servingSize, servingUnit, calories, protein, carbs, fat, fiber. Full-text search index.<br>
+              4. meallogs: userId, date, mealType, embedded items array with calculated macros, totalCalories.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Exercise, Recovery & Target Collections</div>
+            <div class="card-box-desc">
+              5. workoutlogs: userId, date, workoutType, durationMinutes, embedded exercises with sets (reps, weightKg), MET calories burned.<br>
+              6. sleep_logs: userId, sleepStart (ISO UTC), sleepEnd (ISO UTC), durationMinutes, quality (1-5), notes.<br>
+              7. water_logs: userId, timestamp (ISO UTC), amountMl.<br>
+              8. body_measurements: userId, date, weightKg, waist, hip, chest, arm, thigh cm.<br>
+              9. goals: userId, goalType, targetValue, unit, effectiveFrom, isActive.<br>
+              10. workout_templates: userId, name, category, embedded routine exercises.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Schema Validation: Enforced via Mongoose ODM types and runtime Zod schemas</div>
+    </div>
+
+    <!-- Slide 6 -->
+    <div class="slide-container" id="slide-6">
+      <div class="slide-header">
+        <div class="slide-number">Slide 6 of 10</div>
+        <div class="slide-title">Indexing Strategies & Query Optimization</div>
+        <div class="slide-subtitle">Eliminating Collection Scans (COLLSCAN) via Compound & Text Indexes</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card-box">
+            <div class="card-box-title">Single-Field Unique Indexes</div>
+            <div class="card-box-desc">
+              users { email: 1 }<br>
+              Enforces unique user identity.<br>
+              Provides O(1) B-tree lookup time during authentication.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Compound Unique Indexes</div>
+            <div class="card-box-desc">
+              activity_logs { userId: 1, date: -1 }<br>
+              Guarantees exactly one step record per day per user.<br>
+              Optimizes descending chronological range queries.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Full-Text Search Indexes</div>
+            <div class="card-box-desc">
+              food_items { name: 'text', category: 'text' }<br>
+              Powers keyword search across 45+ catalog items including Indian staples with language stemming.
+            </div>
+          </div>
+        </div>
+        <div class="card-box">
+          <div class="card-box-title">Additional Compound Query Indexes</div>
+          <div class="card-box-desc">
+            meallogs: { userId: 1, date: -1 } and { userId: 1, mealType: 1, date: -1 }<br>
+            workoutlogs: { userId: 1, date: -1 } | sleep_logs: { userId: 1, sleepStart: -1 } | water_logs: { userId: 1, timestamp: -1 }<br>
+            body_measurements: { userId: 1, date: -1 } | goals: { userId: 1, goalType: 1, isActive: -1 }
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Index Verification: All production query paths utilize IXSCAN instead of full collection scans</div>
+    </div>
+
+    <!-- Slide 7 -->
+    <div class="slide-container" id="slide-7">
+      <div class="slide-header">
+        <div class="slide-number">Slide 7 of 10</div>
+        <div class="slide-title">MongoDB Aggregation Framework (Part 1)</div>
+        <div class="slide-subtitle">Operational Biometric Pipelines (Pipelines 1 through 4)</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-box">
+            <div class="card-box-title">Pipeline 1: Weekly Step Analysis</div>
+            <div class="card-box-desc">
+              Collection: activity_logs<br>
+              Stages: $match (userId, date range) -> $group by calendar day with $sum on steps and distanceKm -> $project ($round) -> $sort date ascending.<br>
+              Summary Facet: $group with $max, $min, and $avg.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Pipeline 2: Nutrition & Macro Distribution</div>
+            <div class="card-box-desc">
+              Collection: meallogs<br>
+              Stages: $match (userId, date) -> $group by mealType with $sum on totalCalories, totalProtein, totalCarbs, totalFat -> $project.<br>
+              Generates donut chart data for macro percentages.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Pipeline 3: Training Volume Analysis</div>
+            <div class="card-box-desc">
+              Collection: workoutlogs<br>
+              Stages: $match -> $unwind '$exercises' -> $unwind '$exercises.sets' -> $project setVolume ($multiply reps by weightKg) -> $group by exerciseName with $sum -> $sort descending -> $limit 10.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Pipeline 4: Sleep Variance & Consistency</div>
+            <div class="card-box-desc">
+              Collection: sleep_logs<br>
+              Stages: $match -> $group with $avg on durationMinutes, $avg on quality, and $stdDevPop on durationMinutes -> $project consistency index (100 minus variance factor).
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Key Operators: $match, $group, $sum, $avg, $unwind, $multiply, $stdDevPop, $round, $project, $sort</div>
+    </div>
+
+    <!-- Slide 8 -->
+    <div class="slide-container" id="slide-8">
+      <div class="slide-header">
+        <div class="slide-number">Slide 8 of 10</div>
+        <div class="slide-title">MongoDB Aggregation Framework (Part 2)</div>
+        <div class="slide-subtitle">Advanced Cross-Collection Joins & Habit Scoring (Pipelines 5 through 8)</div>
+      </div>
+      <div class="slide-body">
+        <div class="card-box">
+          <div class="card-box-title">Pipeline 5: Calorie Balance Analysis ($lookup Join)</div>
+          <div class="card-box-desc">
+            Base Collection: activity_logs<br>
+            Stages: $match on userId -> $lookup from meallogs matching composite key (userId + date) -> $lookup from workoutlogs matching composite key (userId + date) -> $project daily caloriesConsumed from meallogs, walkingBurned from activity_logs, and workoutBurned from workoutlogs -> $project netBalance = caloriesConsumed - (walkingBurned + workoutBurned).
+          </div>
+        </div>
+        <div class="grid-3">
+          <div class="card-box">
+            <div class="card-box-title">Pipeline 6: Monthly Progress</div>
+            <div class="card-box-desc">
+              Uses $substr on date string (YYYY-MM) -> $sum on steps and workouts -> computes net weight change (lastWeight - firstWeight).
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Pipeline 7: Activity Leaderboard</div>
+            <div class="card-box-desc">
+              Groups 7-day steps across users -> $lookup on users -> $project anonymized name ($concat firstName, space, $substrCP lastName, '.').
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Pipeline 8: Consistency Score</div>
+            <div class="card-box-desc">
+              Algorithmic habit index (0-100) weighting: Steps (25%), Workouts (25%), Sleep (20%), Hydration (15%), Nutrition (15%).
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Advanced Operators: $lookup sub-pipelines, $expr, $arrayElemAt, $substr, $concat, $substrCP</div>
+    </div>
+
+    <!-- Slide 9 -->
+    <div class="slide-container" id="slide-9">
+      <div class="slide-header">
+        <div class="slide-number">Slide 9 of 10</div>
+        <div class="slide-title">Security, Multi-Tenant Isolation & Data Integrity</div>
+        <div class="slide-subtitle">Defense-in-Depth Mechanisms across Application and Database Layers</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-2">
+          <div class="card-box">
+            <div class="card-box-title">Multi-Tenant User Isolation</div>
+            <div class="card-box-desc">
+              The authenticated user's ObjectId is extracted from the cryptographically verified JWT token in middleware (req.user.id).<br><br>
+              Every private query strictly enforces an explicit filter: { userId: req.user.id }.<br><br>
+              Users cannot read, modify, or delete records belonging to other athletes.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Cryptographic Authentication & Cookies</div>
+            <div class="card-box-desc">
+              Passwords are hashed with bcrypt (salt factor 10) and marked select: false in Mongoose models.<br><br>
+              Signed JWT tokens (7-day TTL) are stored in secure HttpOnly cookies, mitigating XSS token theft.
+            </div>
+          </div>
+        </div>
+        <div class="grid-2">
+          <div class="card-box">
+            <div class="card-box-title">Input Validation & NoSQL Injection Defense</div>
+            <div class="card-box-desc">
+              Strict Zod schemas validate data types, date formats, and numerical bounds before database queries execute.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Cascading Account Deletion</div>
+            <div class="card-box-desc">
+              Deleting an account coordinates deleteMany operations across all ten collections, eliminating orphaned records.
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">Security Standard: Defense-in-depth preventing injection, privilege escalation, and data corruption</div>
+    </div>
+
+    <!-- Slide 10 -->
+    <div class="slide-container" id="slide-10">
+      <div class="slide-header">
+        <div class="slide-number">Slide 10 of 10</div>
+        <div class="slide-title">Verification & Conclusion — Academic Demonstration & Outcomes</div>
+        <div class="slide-subtitle">Demonstrated Competencies, Automated Tests, and Seed Datasets</div>
+      </div>
+      <div class="slide-body">
+        <div class="grid-3">
+          <div class="card-box">
+            <div class="card-box-title">Automated Jest Test Suite</div>
+            <div class="card-box-desc">
+              16 of 16 tests passing with 100% success rate.<br><br>
+              Verifies authentication, user isolation, pedometer formulas, macro calculations, workout volume, midnight-crossing sleep, and aggregation pipelines.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">30-Day Idempotent Dataset</div>
+            <div class="card-box-desc">
+              1 demo user (demo@fitpulse.app / Password123!).<br>
+              45 food catalog items (with Indian staples).<br>
+              30 activity logs, 120 meal logs, 20 workouts, 30 sleep logs, 180 water logs, 5 measurements, 7 goals.
+            </div>
+          </div>
+          <div class="card-box">
+            <div class="card-box-title">Live Demonstration Flow</div>
+            <div class="card-box-desc">
+              1. Single-click demo login.<br>
+              2. 6 live KPI cards from MongoDB.<br>
+              3. Date picker reactive charts.<br>
+              4. Food catalog search & meal log.<br>
+              5. Workout template deployment.<br>
+              6. Aggregation pipelines inspector tab.
+            </div>
+          </div>
+        </div>
+        <div class="card-box">
+          <div class="card-box-title">Core Academic Learning Outcomes</div>
+          <div class="card-box-desc">
+            Demonstrated real-world document modeling trade-offs (embedded vs. referenced), high-performance compound indexing, multi-stage aggregation data reductions, and multi-tenant data security in a modern MERN stack application.
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer-note">FitPulse — Your Personal Fitness Intelligence Platform | Ready for Live University Evaluation</div>
+    </div>
+  </main>
+
+  <footer>
+    <button class="nav-btn" id="prev-btn" onclick="prevSlide()" disabled>Previous Slide</button>
+    <div class="progress-text" id="progress-indicator">Slide 1 of 10 (Use Left / Right Arrows)</div>
+    <button class="nav-btn" id="next-btn" onclick="nextSlide()">Next Slide</button>
+  </footer>
+
+  <script>
+    let currentSlide = 1;
+    const totalSlides = 10;
+
+    function updateSlide() {
+      for (let i = 1; i <= totalSlides; i++) {
+        const el = document.getElementById(`slide-${i}`);
+        if (el) {
+          el.classList.toggle('active', i === currentSlide);
+        }
+      }
+      document.getElementById('prev-btn').disabled = currentSlide === 1;
+      document.getElementById('next-btn').disabled = currentSlide === totalSlides;
+      document.getElementById('progress-indicator').textContent = `Slide ${currentSlide} of ${totalSlides} (Use Left / Right Arrows)`;
+    }
+
+    function nextSlide() {
+      if (currentSlide < totalSlides) {
+        currentSlide++;
+        updateSlide();
+      }
+    }
+
+    function prevSlide() {
+      if (currentSlide > 1) {
+        currentSlide--;
+        updateSlide();
+      }
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft') {
+        prevSlide();
+      }
+    });
+  </script>
+</body>
+</html>
